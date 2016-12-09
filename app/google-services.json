@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "501536231604",
+    "firebase_url": "https://xamscaner.firebaseio.com",
+    "project_id": "xamscaner",
+    "storage_bucket": "xamscaner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501536231604:android:25abe4624b63459a",
+        "android_client_info": {
+          "package_name": "online.zerone.xamscaner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501536231604-bn52u2mn8gtc2nkgv7vfcivqfflehse0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "online.zerone.xamscaner",
+            "certificate_hash": "CA373F6294F8D98B4660FBA6DF544F22F104B687"
+          }
+        },
+        {
+          "client_id": "501536231604-v4nmpk65dpfbvfh89j09hfeo9ii65niq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTHTUu_c5vjyLZOUmOElOXzMJphzcYDU8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501536231604-v4nmpk65dpfbvfh89j09hfeo9ii65niq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
