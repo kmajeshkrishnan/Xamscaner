@@ -28,7 +28,7 @@ public class SemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sem);
 
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         DatabaseReference myRef = database.getReference().child("semester");
         gv= (GridView) findViewById(R.id.gv1);
         pb= (ProgressBar) findViewById(R.id.progress1);

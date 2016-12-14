@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**IT SIMPLY DOES NOTHING(FOR NOW)*/
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
