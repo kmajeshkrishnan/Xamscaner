@@ -1,5 +1,6 @@
 package online.zerone.xamscaner;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,37 +9,47 @@ import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static online.zerone.xamscaner.BranchActivity.dbref;
 
 /**THE FIRST ACTIVITY*/
 
 public class SemActivity extends AppCompatActivity {
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     ArrayList<String> list = new ArrayList<>();
     GridView gv;
     ProgressBar pb;
+    String branch;
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        dbref= dbref.getParent();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sem);
 
 
-
-        DatabaseReference myRef = database.getReference().child("semester");
         gv= (GridView) findViewById(R.id.gv1);
         pb= (ProgressBar) findViewById(R.id.progress1);
 
-
         pb.setVisibility(View.VISIBLE);
+
+        Intent i = this.getIntent();
+        branch = i.getExtras().getString("BRANCH");
+        if(branch!=null)
+            dbref= dbref.child(branch);
 
         /**SETTING LISTENER FOR DATA CHANGE IN DATABASE. WHENEVER DATA CHANGES, SCREENSHOT WILL BE TAKEN*/
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 getdata(dataSnapshot);

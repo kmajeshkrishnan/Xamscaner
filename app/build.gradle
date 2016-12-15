@@ -31,6 +31,7 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:9.8.0'
     compile 'com.google.firebase:firebase-auth:9.8.0'
     compile 'com.google.firebase:firebase-database:9.8.0'
+    compile 'com.mani:ThinDownloadManager:1.2.7'
     testCompile 'junit:junit:4.12'
 }
 

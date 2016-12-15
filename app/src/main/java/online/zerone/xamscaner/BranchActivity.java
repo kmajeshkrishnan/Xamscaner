@@ -12,41 +12,32 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import static online.zerone.xamscaner.BranchActivity.dbref;
-
-/**THE SECOND ACTIVITY : SIMILAR TO FIRST ACTIVITY*/
-
-public class SubjectActivity extends AppCompatActivity {
+public class BranchActivity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     ProgressBar pb;
     GridView gv;
     ArrayList<String> list = new ArrayList<>();
-    String sem;
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-       dbref=dbref.getParent();
-    }
+    static DatabaseReference dbref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subject);
-        Intent i = this.getIntent();
-        sem = i.getExtras().getString("SEM");
-        if(sem!=null)
-        dbref=dbref.child(sem);
-     //   DatabaseReference myRef = database.getReference().child("semester/"+sem);
-        pb= (ProgressBar) findViewById(R.id.progress2);
-        gv= (GridView) findViewById(R.id.gv2);
+        setContentView(R.layout.activity_branch);
+
+
+        DatabaseReference myRef = database.getReference().child("branch");
+        dbref=myRef;
+
+
+
+        //   DatabaseReference myRef = database.getReference().child("semester/"+sem);
+        pb= (ProgressBar) findViewById(R.id.progress4);
+        gv= (GridView) findViewById(R.id.gv4);
         pb.setVisibility(View.VISIBLE);
-        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 getdata(dataSnapshot);
@@ -65,9 +56,8 @@ public class SubjectActivity extends AppCompatActivity {
             list.add(ds.getKey());
         }
         pb.setVisibility(View.GONE);
-        StringlistAdapter adapter = new StringlistAdapter(SubjectActivity.this,list);
+        StringlistAdapter adapter = new StringlistAdapter(BranchActivity.this,list);
         gv.setAdapter(adapter);
     }
 
-    }
-
+}

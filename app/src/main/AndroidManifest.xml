@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,9 @@
         </activity>
         <activity android:name=".Pdfreader" />
         <activity android:name=".SemActivity" />
-        <activity android:name=".SubjectActivity"></activity>
+        <activity android:name=".SubjectActivity" />
+        <activity android:name=".PdfListActivity" />
+        <activity android:name=".BranchActivity"></activity>
     </application>
 
 </manifest>

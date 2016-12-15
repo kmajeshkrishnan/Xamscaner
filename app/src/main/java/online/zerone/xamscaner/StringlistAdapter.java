@@ -62,14 +62,29 @@ class StringlistAdapter extends BaseAdapter{
 /**THIS FUNCTION IS TRIGGERED WHEN CLICKED ON A SINGLE CARD*/
     private void string_to_nextA(String s) {
         Intent i;
-        if((context.getClass()).equals(SemActivity.class)){
-            i = new Intent(context,SubjectActivity.class);
+        if((context.getClass()).equals(BranchActivity.class)){
+            i = new Intent(context,SemActivity.class);
+            i.putExtra("BRANCH",s);
+            context.startActivity(i);
         }
-        else{
-            return;
+        else if((context.getClass()).equals(SemActivity.class)){
+            i = new Intent(context,SubjectActivity.class);
+            i.putExtra("SEM",s);
+            context.startActivity(i);
+        }
+        else if((context.getClass().equals(SubjectActivity.class))){
+            i= new Intent(context,PdfListActivity.class);
+            i.putExtra("DATA",s);
+            context.startActivity(i);
+        }
+        else if((context.getClass().equals(PdfListActivity.class))){
+
+            i= new Intent(context,Pdfreader.class);
+            i.putExtra("NAME",s);
+            context.startActivity(i);
         }
 
-        i.putExtra("DATA",s);
-        context.startActivity(i);
+
+
     }
 }

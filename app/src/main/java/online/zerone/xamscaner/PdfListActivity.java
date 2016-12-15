@@ -14,39 +14,34 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static online.zerone.xamscaner.BranchActivity.dbref;
 
-/**THE SECOND ACTIVITY : SIMILAR TO FIRST ACTIVITY*/
-
-public class SubjectActivity extends AppCompatActivity {
-
+public class PdfListActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     ProgressBar pb;
     GridView gv;
     ArrayList<String> list = new ArrayList<>();
-    String sem;
-
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
-       dbref=dbref.getParent();
+        dbref=dbref.getParent();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subject);
+        setContentView(R.layout.activity_pdf_list);
         Intent i = this.getIntent();
-        sem = i.getExtras().getString("SEM");
-        if(sem!=null)
-        dbref=dbref.child(sem);
-     //   DatabaseReference myRef = database.getReference().child("semester/"+sem);
-        pb= (ProgressBar) findViewById(R.id.progress2);
-        gv= (GridView) findViewById(R.id.gv2);
+        String subject = i.getExtras().getString("DATA");
+        if(subject!=null)
+            dbref=dbref.child(subject);
+      //  DatabaseReference myRef = database.getReference().child("semester/"+sem);
+        pb= (ProgressBar) findViewById(R.id.progress3);
+        gv= (GridView) findViewById(R.id.gv3);
         pb.setVisibility(View.VISIBLE);
-        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
+       dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 getdata(dataSnapshot);
@@ -65,9 +60,8 @@ public class SubjectActivity extends AppCompatActivity {
             list.add(ds.getKey());
         }
         pb.setVisibility(View.GONE);
-        StringlistAdapter adapter = new StringlistAdapter(SubjectActivity.this,list);
+        StringlistAdapter adapter = new StringlistAdapter(PdfListActivity.this,list);
         gv.setAdapter(adapter);
     }
 
-    }
-
+}
