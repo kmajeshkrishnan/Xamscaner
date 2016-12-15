@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +20,7 @@ import static online.zerone.xamscaner.BranchActivity.dbref;
 public class SemActivity extends AppCompatActivity {
 
     ArrayList<String> list = new ArrayList<>();
-    GridView gv;
+    ListView gv;
     ProgressBar pb;
     String branch;
 
@@ -37,7 +37,7 @@ public class SemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sem);
 
 
-        gv= (GridView) findViewById(R.id.gv1);
+        gv= (ListView) findViewById(R.id.gv1);
         pb= (ProgressBar) findViewById(R.id.progress1);
 
         pb.setVisibility(View.VISIBLE);

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -52,6 +53,11 @@ public class Pdfreader extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String path;
                 path=dataSnapshot.child(name).getValue().toString();
+                if(!URLUtil.isValidUrl(path))
+                {
+                    Toast.makeText(getApplicationContext(),"This URL is not valid",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Find_file_exists(path,name);
 
             }
@@ -67,11 +73,11 @@ public class Pdfreader extends AppCompatActivity {
 
     private void Find_file_exists(String path, String fileName) {
         Uri destinationUri = null;
-        if(!exists(path))
-        {
-            Toast.makeText(getApplicationContext(),"URL does not exist",Toast.LENGTH_LONG).show();
-            return;
-        }
+//        if(!exists(path))
+//        {
+//            Toast.makeText(getApplicationContext(),"URL does not exist",Toast.LENGTH_LONG).show();
+//            return;
+//        }
         if(isExternalStorageWritable()) {
             destinationUri = Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf");
             if (new File(Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf").toString()).exists()) {
@@ -87,10 +93,10 @@ public class Pdfreader extends AppCompatActivity {
         if (path!=null) {
             File file = new File(String.valueOf(path));
             if(file.canRead()){
-                pdfView.fromFile(file).defaultPage(1).onLoad(new OnLoadCompleteListener() {
+                pdfView.fromFile(file).defaultPage(0).onLoad(new OnLoadCompleteListener() {
                     @Override
                     public void loadComplete(int nbPages) {
-                        Toast.makeText(Pdfreader.this,String.valueOf(nbPages),Toast.LENGTH_LONG).show();
+
                     }
                 }).load();
             }
@@ -141,22 +147,22 @@ public class Pdfreader extends AppCompatActivity {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
     }
-
-    public static boolean exists(String URLName){
-        try {
-            HttpURLConnection.setFollowRedirects(false);
-            // note : you may also need
-            //        HttpURLConnection.setInstanceFollowRedirects(false)
-            HttpURLConnection con =
-                    (HttpURLConnection) new URL(URLName).openConnection();
-            con.setRequestMethod("HEAD");
-            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+//
+//    public static boolean exists(String URLName){
+//        try {
+//            HttpURLConnection.setFollowRedirects(false);
+//            // note : you may also need
+//            //        HttpURLConnection.setInstanceFollowRedirects(false)
+//            HttpURLConnection con =
+//                    (HttpURLConnection) new URL(URLName).openConnection();
+//            con.setRequestMethod("HEAD");
+//            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 
 
 

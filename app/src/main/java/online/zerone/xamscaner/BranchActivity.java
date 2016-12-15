@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,11 +15,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
-public class BranchActivity extends AppCompatActivity {
+public class  BranchActivity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     ProgressBar pb;
-    GridView gv;
+    ListView gv;
     ArrayList<String> list = new ArrayList<>();
     static DatabaseReference dbref;
 
@@ -35,7 +36,7 @@ public class BranchActivity extends AppCompatActivity {
 
         //   DatabaseReference myRef = database.getReference().child("semester/"+sem);
         pb= (ProgressBar) findViewById(R.id.progress4);
-        gv= (GridView) findViewById(R.id.gv4);
+        gv= (ListView) findViewById(R.id.gv4);
         pb.setVisibility(View.VISIBLE);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

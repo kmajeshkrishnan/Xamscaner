@@ -47,7 +47,10 @@ class StringlistAdapter extends BaseAdapter{
         TextView tv = (TextView) view.findViewById(R.id.pdfname);
         ImageView im = (ImageView) view.findViewById(R.id.pdfimg);
         tv.setText(arrayList.get(i));
-        im.setImageResource(R.mipmap.ic_launcher);
+        if(context.getClass().equals(PdfListActivity.class))
+            im.setImageResource(R.drawable.pdf);
+        else
+            im.setImageResource(R.mipmap.ic_launcher);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

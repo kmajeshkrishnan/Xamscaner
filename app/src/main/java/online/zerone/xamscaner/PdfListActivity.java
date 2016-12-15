@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +21,7 @@ import static online.zerone.xamscaner.BranchActivity.dbref;
 public class PdfListActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     ProgressBar pb;
-    GridView gv;
+    ListView gv;
     ArrayList<String> list = new ArrayList<>();
     @Override
     public void onBackPressed() {
@@ -39,7 +40,7 @@ public class PdfListActivity extends AppCompatActivity {
             dbref=dbref.child(subject);
       //  DatabaseReference myRef = database.getReference().child("semester/"+sem);
         pb= (ProgressBar) findViewById(R.id.progress3);
-        gv= (GridView) findViewById(R.id.gv3);
+        gv= (ListView) findViewById(R.id.gv3);
         pb.setVisibility(View.VISIBLE);
        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
