@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -53,8 +54,6 @@ public class Pdfreader extends AppCompatActivity {
                 path=dataSnapshot.child(name).getValue().toString();
                 Find_file_exists(path,name);
 
-
-               // new Downloader().execute(path,name);
             }
 
             @Override
@@ -68,6 +67,11 @@ public class Pdfreader extends AppCompatActivity {
 
     private void Find_file_exists(String path, String fileName) {
         Uri destinationUri = null;
+        if(!exists(path))
+        {
+            Toast.makeText(getApplicationContext(),"URL does not exist",Toast.LENGTH_LONG).show();
+            return;
+        }
         if(isExternalStorageWritable()) {
             destinationUri = Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf");
             if (new File(Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf").toString()).exists()) {
@@ -136,6 +140,22 @@ public class Pdfreader extends AppCompatActivity {
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    public static boolean exists(String URLName){
+        try {
+            HttpURLConnection.setFollowRedirects(false);
+            // note : you may also need
+            //        HttpURLConnection.setInstanceFollowRedirects(false)
+            HttpURLConnection con =
+                    (HttpURLConnection) new URL(URLName).openConnection();
+            con.setRequestMethod("HEAD");
+            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
