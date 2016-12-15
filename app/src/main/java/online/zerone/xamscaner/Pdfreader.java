@@ -67,13 +67,15 @@ public class Pdfreader extends AppCompatActivity {
     }
 
     private void Find_file_exists(String path, String fileName) {
-        if(new File(Uri.parse(this.getExternalCacheDir().toString()+"/"+fileName+".pdf").toString()).exists()) {
-            Uri destinationUri = Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf");
-            display(destinationUri);
-        }
-        else
-            Dwn_frm_path(path,fileName);
+        Uri destinationUri = null;
+        if(isExternalStorageWritable()) {
+            destinationUri = Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf");
+            if (new File(Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf").toString()).exists()) {
+                display(destinationUri);
+            } else
+                Dwn_frm_path(path,destinationUri);
 
+        }
     }
 
     void display(Uri path)
@@ -93,12 +95,9 @@ public class Pdfreader extends AppCompatActivity {
 
 
 
-    private void Dwn_frm_path(String DownloadUrl,String fileName) {
+    private void Dwn_frm_path(String DownloadUrl,Uri destinationUri) {
+
         Uri downloadUri = Uri.parse(DownloadUrl);
-        Uri destinationUri=null;
-        if(isExternalStorageWritable()) {
-                destinationUri = Uri.parse(this.getExternalCacheDir().toString() + "/" + fileName + ".pdf");
-        }
         pb.setVisibility(View.VISIBLE);
         pb.setProgress(0);
         final Uri finalDestinationUri = destinationUri;
@@ -140,5 +139,5 @@ public class Pdfreader extends AppCompatActivity {
     }
 
 
-    
+
 }
