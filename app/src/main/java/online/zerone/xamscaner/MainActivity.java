@@ -65,71 +65,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-/**
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_CODE && resultCode == RESULT_OK && data!=null && data.getData()!=null){
-            path = data.getData();
-            String name = data.toString();
-            name=name.substring(name.lastIndexOf("/")+1,name.lastIndexOf("f")-1);
-            uploadFile(path,name);
-        }
-    }
 
-
-
-    private void uploadFile(Uri file,String name) {
-        StorageReference riversRef = mStorageRef.child("TestPdf/"+name);
-        final Pdfdoc doc = new Pdfdoc();
-        doc.setName(name);
-        final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Uploading.....");
-        progress.show();
-
-        riversRef.putFile(file)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri u =taskSnapshot.getDownloadUrl();
-                        if(u!=null)
-                          doc.setPath(u.toString());
-                        if(helper.save(doc)){
-                            progress.cancel();
-                            Toast.makeText(getApplicationContext(),"Upload Success!",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        progress.cancel();
-                        Toast.makeText(getApplicationContext(),"Upload Failed",Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double persantage = (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                        progress.setMessage((int)persantage+"% Completed");
-                    }
-                });
-
-    }
-
-
-
-    private void selectfile() {
-        Intent intent = new Intent();
-        intent.setType("application/pdf");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select PDF"),PICK_CODE);
-
-    }
-
-
-
-*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

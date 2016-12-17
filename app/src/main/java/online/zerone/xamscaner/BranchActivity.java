@@ -3,6 +3,7 @@ package online.zerone.xamscaner;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -28,10 +29,8 @@ public class  BranchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_branch);
 
-
         DatabaseReference myRef = database.getReference().child("branch");
         dbref=myRef;
-
 
 
         //   DatabaseReference myRef = database.getReference().child("semester/"+sem);
